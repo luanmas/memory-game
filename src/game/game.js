@@ -3,6 +3,7 @@ let game = {
     lockMode: false,
     firstCard: null,
     secondCard: null,
+    moves: 0,
 
     techs: ['bootstrap',
         'css',
@@ -50,6 +51,7 @@ let game = {
         this.secondCard = null;
         this.lockMode = false;
     },
+    
     unflipCards() {
         this.firstCard.flipped = false;
         this.secondCard.flipped = false;
@@ -58,11 +60,34 @@ let game = {
 
     checkGameOver() {
 
-        return this.cards.filter(card => !card.flipped).length == 0;
+        return this.cards.filter(card => !card.flipped).length === 0;
     },
 
+    checkMoves() {
+        return this.moves++
+    },
 
+    clearMoves() {
+        return this.moves = 0;
+    },
 
+    checkRank() {
+        if(this.moves <= 13) {
+            return "Perfect";
+        }
+
+        if(this.moves <= 16) {
+            return "Very good";
+        }
+
+        if(this.moves <= 20) {
+            return "Good";
+        } 
+
+        if(this.moves > 20) {
+            return "Bad";
+        }
+    },
 
 
     createCardsFromTechs: function () {

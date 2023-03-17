@@ -15,6 +15,7 @@ function MemoryGame() {
 
   const restartGame = () => {
       game.clearCards();
+      game.clearMoves();
       setCards(game.createCardsFromTechs());
       setGameOver(false);
   } 
@@ -23,6 +24,8 @@ function MemoryGame() {
     if (game.setCard(card.id)) {
 
       if (game.secondCard) {
+        game.checkMoves();
+        
           if (game.checkMatch()) {
               game.clearCards();
               if(game.checkGameOver()) {
@@ -46,7 +49,7 @@ function MemoryGame() {
   return (
     <div className="App">
       <GameBoard handleFlip={handleFlip} cards={cards}></GameBoard>
-      <GameOver show={gameOver} restart={restartGame}></GameOver>
+      <GameOver show={gameOver} restart={restartGame} moves={game.moves} rank={game.checkRank()}></GameOver>
     </div>
   );
 }
